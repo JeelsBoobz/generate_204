@@ -1,0 +1,34 @@
+name: Deploy gh-pages generate_204 No Content
+
+on:
+  push:
+    branches:
+      - main  # Ganti 'main' jika branch utama Anda berbeda
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Create /generate_204 response
+      run: |
+        mkdir -p public
+        echo "" > public/generate_204
+        echo "" > public/index.html
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: public
+        # Setting 'keep_files: true' to avoid deleting other pages
+        keep_files: true
+
