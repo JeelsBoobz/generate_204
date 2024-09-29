@@ -24,11 +24,9 @@ jobs:
         echo "" > public/generate_204
         echo "" > public/index.html
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
+    - uses: crazy-max/ghaction-github-pages@v2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: public
-        # Setting 'keep_files: true' to avoid deleting other pages
-        keep_files: true
-
+        target_branch: gh-pages
+        build_dir: public
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
